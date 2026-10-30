@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+<link rel="manifest" href="./manifest.webmanifest">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -119,6 +120,19 @@ document.getElementById('tagline').innerText=english?'Discover Algeria’s histo
 document.getElementById('welcome').innerText=english?'Welcome to JODOUR 🇩🇿':'مرحبًا بك في جذور 🇩🇿';
 document.querySelectorAll('[data-ar]').forEach(el=>el.innerText=english?el.dataset.en:el.dataset.ar);
 document.getElementById('search').placeholder=english?'Search for a place, dish or tradition...':'ابحث عن موقع أو أكلة أو تقليد...';
+}
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("./sw.js")
+      .then(function () {
+        console.log("JODOUR offline support enabled");
+      })
+      .catch(function (error) {
+        console.error("Service worker error:", error);
+      });
+  });
 }
 </script>
 </body>
