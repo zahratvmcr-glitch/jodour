@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#125b3b">
+<title>جذور | JODOUR</title>
+<style>
+:root{--green:#125b3b;--dark:#093c29;--gold:#c9a45c;--cream:#faf7ef}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:#20352a;font-family:Tahoma,Arial,sans-serif}
+header{background:linear-gradient(140deg,var(--dark),#19734b);color:white;padding:28px 18px 35px;text-align:center;border-radius:0 0 28px 28px}
+.logo{font-size:38px;font-weight:bold;color:#f0d99f}
+header p{margin:8px 0;color:#e5efdf}
+.lang{position:absolute;left:15px;top:15px;background:#ffffff22;color:white;border:1px solid #ffffff77;border-radius:20px;padding:8px 13px}
+main{max-width:850px;margin:auto;padding:18px}
+h2{color:var(--green);font-size:21px}
+.search{width:100%;padding:14px;border:1px solid #ddd;border-radius:14px;font-size:16px;margin:8px 0 18px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:white;border:1px solid #eee5d5;border-radius:18px;padding:18px 12px;min-height:125px;text-align:center;box-shadow:0 3px 12px #183b2510;cursor:pointer}
+.card:active{transform:scale(.98)}
+.card .emoji{font-size:34px}
+.card h3{font-size:16px;color:var(--green);margin:9px 0 5px}
+.card p{font-size:12px;color:#777;margin:0}
+.feature{grid-column:span 2;background:linear-gradient(120deg,#125b3b,#26764e);color:white}
+.feature h3{color:white;font-size:20px}
+.feature p{color:#e9f2e9}
+.adam{grid-column:span 2;background:#f1e4c7}
+.adam h3{color:#75501c}
+.section{display:none}
+.section.active{display:block}
+.back{border:0;background:#e7eee8;color:var(--green);padding:10px 17px;border-radius:12px;font-size:15px;margin-bottom:12px}
+.item{background:white;padding:15px;border-radius:15px;margin:10px 0;border:1px solid #eee}
+footer{position:sticky;bottom:0;background:white;display:flex;justify-content:space-around;padding:12px 5px;border-top:1px solid #e9e5dc}
+footer button{border:0;background:none;color:var(--green);font-size:13px;cursor:pointer}
+.note{font-size:12px;color:#777;line-height:1.8;margin-top:25px}
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.feature,.adam{grid-column:span 3}}
+</style>
+</head>
+<body>
+<header>
+<button class="lang" onclick="toggleLanguage()">English</button>
+<div class="logo">جذور</div>
+<div style="font-size:14px;letter-spacing:3px">JODOUR</div>
+<p id="tagline">اكتشف تاريخ الجزائر وتراثها وثقافتها</p>
+</header>
+
+<main>
+<div id="home">
+<h2 id="welcome">مرحبًا بك في جذور 🇩🇿</h2>
+<input class="search" id="search" placeholder="ابحث عن موقع أو أكلة أو تقليد..." oninput="searchItems()">
+<div class="grid" id="cards">
+<div class="card feature" onclick="openSection('heritage')">
+<div class="emoji">🏛️</div><h3 data-ar="موسوعة التراث الجزائري" data-en="Algerian Heritage Encyclopedia">موسوعة التراث الجزائري</h3><p data-ar="المعالم والآثار والأكلات والعادات" data-en="Landmarks, archaeology, food and traditions">المعالم والآثار والأكلات والعادات</p>
+</div>
+<div class="card" onclick="openSection('history')"><div class="emoji">📜</div><h3 data-ar="تاريخ الجزائر" data-en="History of Algeria">تاريخ الجزائر</h3><p>رحلة عبر الزمن</p></div>
+<div class="card" onclick="openSection('world')"><div class="emoji">🌍</div><h3 data-ar="الجزائر في الهيئات الدولية" data-en="Algeria in International Organizations">الجزائر في الهيئات الدولية</h3><p>الحضور والتراث العالمي</p></div>
+<div class="card" onclick="openSection('quotes')"><div class="emoji">💬</div><h3 data-ar="قالوا عن الجزائر" data-en="What They Said About Algeria">قالوا عن الجزائر</h3><p>شهادات واقتباسات موثقة</p></div>
+<div class="card adam" onclick="openSection('adam')"><div class="emoji">🧒🏻🧭</div><h3 data-ar="استكشف مع آدم" data-en="Explore with Adam">استكشف مع آدم</h3><p>مغامرات تعليمية للصغار</p></div>
+</div>
+</div>
+
+<div class="section" id="heritage">
+<button class="back" onclick="goHome()">← الرئيسية</button>
+<h2>موسوعة التراث الجزائري</h2>
+<div class="grid">
+<div class="card" onclick="showInfo('المعالم الأثرية','اكتشف المدن والمواقع الأثرية الجزائرية، مثل تيمقاد وجميلة وتيبازة.')"><div class="emoji">🏛️</div><h3>المعالم الأثرية</h3></div>
+<div class="card" onclick="showInfo('الأكلات الجزائرية','اكتشف الكسكس والشخشوخة والرشتة والكسرة والمقروط وأطباق المناطق الجزائرية.')"><div class="emoji">🍲</div><h3>الأكلات الجزائرية</h3></div>
+<div class="card" onclick="showInfo('العادات والتقاليد','اللباس التقليدي والحرف والفنون والاحتفالات والعادات المحلية.')"><div class="emoji">🧵</div><h3>العادات والتقاليد</h3></div>
+</div>
+<div id="details"></div>
+</div>
+
+<div class="section" id="history"><button class="back" onclick="goHome()">← الرئيسية</button><h2>تاريخ الجزائر</h2><div class="item">قريبًا: خط زمني موثق لمراحل تاريخ الجزائر من العصور القديمة إلى العصر الحديث.</div></div>
+<div class="section" id="world"><button class="back" onclick="goHome()">← الرئيسية</button><h2>الجزائر في الهيئات الدولية</h2><div class="item">قريبًا: التراث الجزائري في اليونسكو والمنظمات الدولية.</div></div>
+<div class="section" id="quotes"><button class="back" onclick="goHome()">← الرئيسية</button><h2>قالوا عن الجزائر</h2><div class="item">ستُضاف هنا اقتباسات موثقة مع أصحابها ومصادرها.</div></div>
+<div class="section" id="adam"><button class="back" onclick="goHome()">← الرئيسية</button><h2>استكشف مع آدم 🧭</h2><div class="item">مرحبًا! أنا آدم. هيا نكتشف معًا أسرار تاريخ الجزائر ومعالمها.</div></div>
+<div class="section" id="contact"><button class="back" onclick="goHome()">← الرئيسية</button><h2>اتصل بنا</h2><div class="item">ستُضاف وسائل الاتصال الرسمية بعد تزويدنا بها.</div></div>
+</main>
+
+<footer>
+<button onclick="goHome()">⌂ الرئيسية</button>
+<button onclick="focusSearch()">⌕ البحث</button>
+<button onclick="openSection('heritage')">▦ الأقسام</button>
+<button onclick="openSection('contact')">✉ اتصل بنا</button>
+</footer>
+
+<script>
+let english=false;
+function openSection(id){
+document.getElementById('home').style.display='none';
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+window.scrollTo(0,0);
+}
+function goHome(){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById('home').style.display='block';
+window.scrollTo(0,0);
+}
+function showInfo(title,description){
+document.getElementById('details').innerHTML='<div class="item"><h3>'+title+'</h3><p>'+description+'</p><p>سيُضاف المحتوى الموثق والمراجع والصور والفيديوهات بعد التحقق منها.</p></div>';
+}
+function focusSearch(){goHome();document.getElementById('search').focus()}
+function searchItems(){
+let q=document.getElementById('search').value.trim().toLowerCase();
+document.querySelectorAll('#cards .card').forEach(c=>{
+c.style.display=c.innerText.toLowerCase().includes(q)?'block':'none';
+});
+}
+function toggleLanguage(){
+english=!english;
+document.documentElement.lang=english?'en':'ar';
+document.documentElement.dir=english?'ltr':'rtl';
+document.querySelector('.lang').innerText=english?'العربية':'English';
+document.querySelector('.logo').innerText=english?'JODOUR':'جذور';
+document.getElementById('tagline').innerText=english?'Discover Algeria’s history, heritage and culture':'اكتشف تاريخ الجزائر وتراثها وثقافتها';
+document.getElementById('welcome').innerText=english?'Welcome to JODOUR 🇩🇿':'مرحبًا بك في جذور 🇩🇿';
+document.querySelectorAll('[data-ar]').forEach(el=>el.innerText=english?el.dataset.en:el.dataset.ar);
+document.getElementById('search').placeholder=english?'Search for a place, dish or tradition...':'ابحث عن موقع أو أكلة أو تقليد...';
+}
+</script>
+</body>
+</html>
